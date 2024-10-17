@@ -1,16 +1,13 @@
 pipeline {
     agent any
 
-    environment {
-        // Define any environment variables here
-        // Example: JAVA_HOME = '/path/to/java'
-    }
+
 
     stages {
         stage('Checkout') {
             steps {
                 echo 'Checking out the code...'
-                git 'https://github.com/AnjanaK93/EurekaServer.git', branch:'main'
+                git url: 'https://github.com/AnjanaK93/EurekaServer.git', branch:'main'
             }
         }
 
