@@ -35,7 +35,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                bat 'docker build -t eureka-image'
+                bat 'docker build -t eureka-image .'
                 bat 'docker run -p 8761:8761 -d --name registry-sr --network eureka-network eureka-image'
 
                 // Add your deployment steps here, e.g., copying the jar to a server
