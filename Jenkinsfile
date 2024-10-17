@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out the code...'
-                git 'https://github.com/AnjanaK93/ServiceRegistry.git', branch:'main'
+                git 'https://github.com/AnjanaK93/EurekaServer.git', branch:'main'
             }
         }
 
@@ -28,17 +28,13 @@ pipeline {
             }
         }
 
-        stage('Package') {
-            steps {
-                echo 'Packaging the application...'
-                bat 'mvn package' // Use 'sh' for Linux
-            }
-        }
+
 
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                bat 'copy target/eureka-server.jar C:\Users\Administrator\Documents\ProjectMicroserver\Deployment'
+                bat 'docker build -t eureka-image'
+                bat 'docker run -p 8761:8761 -d --name registry-sr --network eureka-network eureka-image'
 
                 // Add your deployment steps here, e.g., copying the jar to a server
                 // Example: bat 'copy target/eureka-server.jar C:\\path\\to\\deploy'
